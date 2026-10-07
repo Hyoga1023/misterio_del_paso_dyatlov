@@ -1,0 +1,108 @@
+/* ========== VARIABLES (paleta única, sin verdes) ========== */
+:root {
+  --noche: #070b14;
+  --acero: #121b2c;
+  --hielo: #cfe8ff;
+  --niebla: #8aa0b8;
+  --sangre: #e63946;
+  --ambar: #ffb703;
+  --f-titulo: 'Oswald', sans-serif;
+  --f-texto: 'Special Elite', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: radial-gradient(ellipse at top, var(--acero), var(--noche) 70%);
+  color: var(--hielo);
+  font-family: var(--f-texto);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ========== CAPAS FIJAS ========== */
+#nieve { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+#nieve canvas { display: block; }
+#progreso {
+  position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 50;
+  background: var(--sangre); transform: scaleX(0); transform-origin: left;
+}
+#linterna {
+  position: fixed; inset: 0; z-index: 2; pointer-events: none; display: none;
+  background: radial-gradient(circle 240px at var(--x, 50%) var(--y, 50%), transparent 0%, rgba(7,11,20,.82) 100%);
+}
+@media (hover: hover) and (min-width: 768px) { #linterna { display: block; } }
+
+main { position: relative; z-index: 1; }
+
+/* ========== HERO ========== */
+.hero {
+  min-height: 100svh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center; padding: 2rem 1.2rem;
+}
+.sello {
+  font-family: var(--f-titulo); letter-spacing: .3em; font-size: clamp(.65rem, 2.4vw, .85rem);
+  color: var(--ambar); margin-bottom: 1.2rem;
+}
+.sello.rojo { color: var(--sangre); border: 2px solid var(--sangre); display: inline-block; padding: .3rem .8rem; transform: rotate(-2deg); }
+.titulo {
+  font-family: var(--f-titulo); font-weight: 700; line-height: .95;
+  font-size: clamp(3rem, 15vw, 10rem); letter-spacing: .04em; text-shadow: 0 0 30px rgba(207,232,255,.25);
+}
+.titulo span { color: var(--sangre); display: block; }
+.sub { margin-top: 1.5rem; color: var(--niebla); font-size: clamp(.95rem, 3.5vw, 1.2rem); max-width: 34ch; }
+.scroll { margin-top: 3rem; color: var(--ambar); font-size: .85rem; animation: parpadeo 2s infinite; }
+@keyframes parpadeo { 50% { opacity: .2; } }
+
+/* ========== CAPÍTULOS ========== */
+.capitulo {
+  min-height: 80svh; display: flex; flex-direction: column; justify-content: center;
+  max-width: 680px; margin: 0 auto; padding: 4rem 1.4rem;
+}
+.num { font-family: var(--f-titulo); font-size: clamp(4rem, 18vw, 8rem); color: rgba(207,232,255,.08); line-height: 1; }
+.capitulo h2 { font-family: var(--f-titulo); font-size: clamp(1.8rem, 7vw, 3rem); color: var(--ambar); margin-bottom: 1rem; letter-spacing: .05em; }
+.capitulo p { font-size: clamp(1rem, 3.8vw, 1.25rem); }
+.capitulo strong { color: var(--sangre); }
+.capitulo em { color: var(--ambar); }
+
+/* ========== EXPEDIENTE FINAL ========== */
+.expediente { min-height: 100svh; display: grid; place-items: center; padding: 3rem 1.2rem; }
+.tarjeta {
+  width: min(100%, 640px); background: rgba(18,27,44,.92); border: 1px solid var(--niebla);
+  border-left: 6px solid var(--sangre); padding: clamp(1.4rem, 5vw, 2.6rem); box-shadow: 0 0 60px rgba(230,57,70,.2);
+}
+.tarjeta h2 { font-family: var(--f-titulo); font-size: clamp(1.6rem, 6vw, 2.4rem); margin: 1.2rem 0; letter-spacing: .06em; }
+.censurado { font-size: clamp(.95rem, 3.6vw, 1.15rem); }
+.barra { background: var(--hielo); color: var(--hielo); user-select: none; padding: 0 .15rem; display: inline-block; }
+.aviso { margin: 1.6rem 0; padding: 1rem; border: 1px dashed var(--ambar); color: var(--ambar); font-size: clamp(.9rem, 3.4vw, 1.05rem); }
+.botones { display: flex; flex-wrap: wrap; gap: .8rem; }
+.btn {
+  flex: 1 1 200px; padding: .9rem 1rem; font-family: var(--f-titulo); font-size: 1rem; letter-spacing: .08em;
+  cursor: pointer; border: 2px solid; background: transparent; transition: background .25s, color .25s;
+}
+.btn-no { color: var(--sangre); border-color: var(--sangre); }
+.btn-no:hover { background: var(--sangre); color: var(--noche); }
+.btn-si { color: var(--hielo); border-color: var(--hielo); }
+.btn-si:hover { background: var(--hielo); color: var(--noche); }
+
+/* ========== SWEETALERT2 (misma paleta) ========== */
+.swal-misterio { background: var(--acero) !important; color: var(--hielo) !important; border: 1px solid var(--sangre); font-family: var(--f-texto) !important; }
+.swal-misterio .swal2-title { font-family: var(--f-titulo) !important; color: var(--ambar) !important; letter-spacing: .05em; }
+.swal-misterio .swal2-html-container { color: var(--hielo) !important; }
+
+/* ========== FOTOS DE CADA SECCIÓN ========== */
+.foto {
+  margin: 0 0 1.4rem; border: 1px solid var(--niebla); background:
+    repeating-linear-gradient(45deg, var(--acero), var(--acero) 10px, #0d1524 10px, #0d1524 20px);
+  position: relative; overflow: hidden;
+}
+.foto img {
+  display: block; width: 100%; height: auto; max-height: 55svh; object-fit: cover;
+  filter: grayscale(.85) contrast(1.15) brightness(.85); transition: filter .6s;
+}
+.foto:hover img { filter: grayscale(.2) contrast(1.1) brightness(.95); }
+.foto figcaption {
+  font-family: var(--f-titulo); font-size: 1rem; letter-spacing: .2em; color: var(--ambar);
+  padding: .5rem .8rem; background: rgba(7,11,20,.85);
+}
+.foto:not(:has(img)) { min-height: 180px; display: grid; place-items: end start; }
